@@ -75,8 +75,8 @@ public class ChooseAreaFragment extends Fragment {
     private int currentLeavel;
 
 
-    private static final String TAG = "ChooseAreaFragment";
-    @Nullable
+//    private static final String TAG = "ChooseAreaFragment";
+//    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area,container,false);
@@ -94,6 +94,7 @@ public class ChooseAreaFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // 列表的点击响应
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +109,7 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
-
+       // 设定返回按钮的响应
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +145,7 @@ public class ChooseAreaFragment extends Fragment {
             currentLeavel = LEAVEL_PROVINCE;
         }
         else {
+            // 从服务器获取省份数据
             String address = "http://guolin.tech/api/china";
             queryAreaDataFromServer(address,"province");
 
@@ -166,6 +168,7 @@ public class ChooseAreaFragment extends Fragment {
             currentLeavel = LEAVEL_CITY;
         }
         else {
+            // 从服务器获取城市数据
             String address = "http://guolin.tech/api/china/"+selectedProvince.getProvinceCode();
             queryAreaDataFromServer(address,"city");
         }
@@ -188,6 +191,7 @@ public class ChooseAreaFragment extends Fragment {
             currentLeavel = LEAVEL_COUNTY;
         }
         else {
+            // 从服务器获取县数据
             String address = "http://guolin.tech/api/china/"+selectedProvince.getProvinceCode()+"/"+selectedCity.getCityCode();
             queryAreaDataFromServer(address,"county");
         }
@@ -214,16 +218,18 @@ public class ChooseAreaFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(TAG, "onResponse: 从服务器获取数据成功");
                 String responseText = response.body().string();
                 boolean result = false;
                 if (type.equals("province")) {
+                    // 解析省份Json数据
                     result = JsonHandle.handleProvinceResponse(responseText);
                 }
                 else if (type.equals("city")) {
+                    // 解析城市Json数据
                     result = JsonHandle.handleCityResponse(responseText,selectedProvince.getProvinceCode());
                 }
                 else if (type.equals("county")) {
+                    // 解析县Json数据
                     result = JsonHandle.handleCountyResponse(responseText,selectedCity.getCityCode());
                 }
 
