@@ -1,5 +1,6 @@
 package com.heng.weather.Fragment;
 
+import com.heng.weather.Config.GlobalConfig;
 import com.heng.weather.DataStore.*;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -146,8 +147,7 @@ public class ChooseAreaFragment extends Fragment {
         }
         else {
             // 从服务器获取省份数据
-            String address = "http://guolin.tech/api/china";
-            queryAreaDataFromServer(address,"province");
+            queryAreaDataFromServer(GlobalConfig.GCURLArea,"province");
 
         }
     }
@@ -169,7 +169,7 @@ public class ChooseAreaFragment extends Fragment {
         }
         else {
             // 从服务器获取城市数据
-            String address = "http://guolin.tech/api/china/"+selectedProvince.getProvinceCode();
+            String address = GlobalConfig.GCURLArea+selectedProvince.getProvinceCode();
             queryAreaDataFromServer(address,"city");
         }
     }
@@ -192,7 +192,7 @@ public class ChooseAreaFragment extends Fragment {
         }
         else {
             // 从服务器获取县数据
-            String address = "http://guolin.tech/api/china/"+selectedProvince.getProvinceCode()+"/"+selectedCity.getCityCode();
+            String address = GlobalConfig.GCURLArea +selectedProvince.getProvinceCode()+"/"+selectedCity.getCityCode();
             queryAreaDataFromServer(address,"county");
         }
     }
