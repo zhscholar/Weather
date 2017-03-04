@@ -3,5 +3,6 @@
     <string name="app_name">天气预报</string>
     <string name="area_china">中国</string>
     <string name="progress_hint">加载中...</string>
+    <string name="forecast_title">一周天气预报</string>
 
 </resources>

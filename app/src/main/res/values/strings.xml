@@ -2,5 +2,6 @@
     <string name="app_name">Weather</string>
     <string name="area_china">China</string>
     <string name="progress_hint">Waiting...</string>
+    <string name="forecast_title">Weekly weather forecast</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.heng.weather.Fragment;
 import com.heng.weather.Config.GlobalConfig;
 import com.heng.weather.DataStore.*;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.heng.weather.JsonAnalyse.JsonHandle;
 import com.heng.weather.MyApplication;
 import com.heng.weather.Network.HttpUtil;
 import com.heng.weather.R;
+import com.heng.weather.WeatherActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,6 +108,14 @@ public class ChooseAreaFragment extends Fragment {
                 else if (currentLeavel == LEAVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }
+                else if (currentLeavel == LEAVEL_COUNTY) {
+                    // 进入并显示温度数据页面
+                    selectedCounty = countyList.get(position);
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("area_name",selectedCounty.getCountyName());
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
